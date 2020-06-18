@@ -1,6 +1,6 @@
 package com.hierarchical.HierProject.bean;
 
-public class OrganizationModule {
+public class OrganizationModuleBean {
 	public String organizationName;
 	public String moduleName;
 	public String getOrganizationName() {

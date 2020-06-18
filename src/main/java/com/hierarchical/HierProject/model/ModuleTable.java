@@ -12,6 +12,8 @@ public class ModuleTable {
 	private String module_UUID;
 	private String module_name;
 	private int module_id;
+	private String organization_UUID;
+	
 	public String getModule_UUID() {
 		return module_UUID;
 	}
@@ -29,5 +31,11 @@ public class ModuleTable {
 	}
 	public void setModule_id(int module_id) {
 		this.module_id = module_id;
+	}
+	public String getOrganization_UUID() {
+		return organization_UUID;
+	}
+	public void setOrganization_UUID(String organization_UUID) {
+		this.organization_UUID = organization_UUID;
 	}
 }

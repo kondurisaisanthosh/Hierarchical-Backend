@@ -13,10 +13,14 @@ import com.hierarchical.HierProject.model.ModuleTable;
 public interface ModuleTableRepo extends JpaRepository<ModuleTable,String>{
 	
 	@Modifying
-	@Query(value="INSERT INTO module_table(module_name) VALUES (?1)",nativeQuery=true)
+	@Query(value="INSERT INTO module_table(module_name,organization_UUID)VALUES(?1,?2)",nativeQuery=true)
 	@Transactional
-	public void addModule(String moduleName);
+	public void addModule(String moduleName,String organization_UUID);
 	
-	@Query(value="SELECT * FROM module_table WHERE module_name=(?1)",nativeQuery=true)
-	public ModuleTable getModule(String moduleName);
+	@Query(value="SELECT * FROM module_table WHERE module_name=(?1) and organization_UUID=(?2)",nativeQuery=true)
+	public ModuleTable getModule(String moduleName,String organization_UUID);
+	
+	
+	@Query(value="SELECT * FROM module_table WHERE organization_UUID=(?1)",nativeQuery=true)
+	public Iterable<ModuleTable> getModules(String organization_UUID);
 }
