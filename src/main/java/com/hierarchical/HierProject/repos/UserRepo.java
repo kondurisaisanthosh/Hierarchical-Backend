@@ -18,4 +18,8 @@ public interface UserRepo extends JpaRepository<User,String> {
     @Transactional
     public void storeUserData(String username,String password);
     
+    
+    @Query(value="SELECT count(1) FROM user_table WHERE username=?1",nativeQuery=true)
+	public int checkuser(String username);
+    
 }

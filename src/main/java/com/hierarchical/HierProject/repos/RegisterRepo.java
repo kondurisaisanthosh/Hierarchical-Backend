@@ -19,5 +19,12 @@ public interface RegisterRepo extends JpaRepository<Register,String>{
 	
 	@Query(value="SELECT * FROM register_table WHERE userUUID=?1",nativeQuery=true)
 	public Register getRegisterData(String userUUID);
+	
+
+	@Query(value="SELECT count(1) FROM register_table WHERE email=?1",nativeQuery=true)
+	public int checkEmail(String email);
+	
+	@Query(value="SELECT count(1) FROM register_table WHERE phone=?1",nativeQuery=true)
+	public int checkPhone(String phone);
 
 }

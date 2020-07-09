@@ -1,6 +1,7 @@
 package com.hierarchical.HierProject;
 
 import com.hierarchical.HierProject.bean.UserBean;
+import com.hierarchical.HierProject.exception.ApiRequestException;
 import com.hierarchical.HierProject.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -30,7 +31,8 @@ public class Welcome {
                     new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword())
             );
         } catch (Exception ex) {
-            throw new Exception("inavalid username/password");
+//        	return "inavalid username/password server";
+            throw new ApiRequestException("Inavalid Credentials");
         }
         return jwtUtil.generateToken(authRequest.getUsername());
     }
