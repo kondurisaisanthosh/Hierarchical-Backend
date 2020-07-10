@@ -24,17 +24,21 @@ public class RegisterController {
 	@PostMapping(value="/register")
 	public @ResponseBody String registerData(@RequestBody RegisterBean registerBean) {
 		
+		String errorMessage="";
 		
 		if(userRepo.checkuser(registerBean.getUsername()) ==1) {
-			throw new ApiRequestException("username");
+			errorMessage+="username";
 		}
 		
 		if(registerRepo.checkEmail(registerBean.getEmail()) ==1) {
-			throw new ApiRequestException("email");
+			errorMessage+=" email";
 		}
 		
 		if(registerRepo.checkPhone(registerBean.getPhone()) ==1) {
-			throw new ApiRequestException("phone");
+			errorMessage+=" phone";
+		}
+		if(errorMessage.length()!=0) {
+			throw new ApiRequestException(errorMessage);
 		}
 		
 		userRepo.storeUserData(registerBean.getUsername(),registerBean.getPassword());
