@@ -23,4 +23,14 @@ public interface ModuleTableRepo extends JpaRepository<ModuleTable,String>{
 	
 	@Query(value="SELECT * FROM module_table WHERE organization_UUID=(?1)",nativeQuery=true)
 	public Iterable<ModuleTable> getModules(String organization_UUID);
+	
+	
+	@Modifying
+	@Query(value="delete FROM module_table where organization_UUID=(?1)",nativeQuery=true)
+	@Transactional
+	public void deleteAllModules(String organization_UUID);
+	
+	
+	@Query(value="select count(1) from module_table where organization_UUID=(?1)",nativeQuery=true)
+	public int numberOfModules(String org_UUID);
 }

@@ -1,13 +1,13 @@
 package com.hierarchical.HierProject.bean;
 
 public class OrganizationModuleBean {
-	public String organizationName;
+	public String organizationUUID;
 	public String moduleName;
-	public String getOrganizationName() {
-		return organizationName;
+	public String getOrganizationUUID() {
+		return organizationUUID;
 	}
-	public void setOrganizationName(String organizationName) {
-		this.organizationName = organizationName;
+	public void setOrganizationUUID(String organizationUUID) {
+		this.organizationUUID = organizationUUID;
 	}
 	public String getModuleName() {
 		return moduleName;
@@ -15,5 +15,5 @@ public class OrganizationModuleBean {
 	public void setModuleName(String moduleName) {
 		this.moduleName = moduleName;
 	}
-
+	
 }

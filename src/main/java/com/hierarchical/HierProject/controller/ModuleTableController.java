@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hierarchical.HierProject.bean.OrganizationModuleBean;
+import com.hierarchical.HierProject.exception.ApiRequestException;
 import com.hierarchical.HierProject.model.ModuleTable;
-import com.hierarchical.HierProject.model.Organization;
 import com.hierarchical.HierProject.repos.ModuleTableRepo;
 import com.hierarchical.HierProject.repos.OrganizationRepo;
 
@@ -28,19 +28,19 @@ public class ModuleTableController {
 	
 	@PostMapping(value="/addModule")
 	public @ResponseBody String addModule(@RequestBody OrganizationModuleBean orgModule) {
-		Organization organization=organizationRepo.getOgranization(orgModule.getOrganizationName());
-		ModuleTable module=moduleTableRepo.getModule(orgModule.getModuleName(),organization.getOrganization_UUID());
+		ModuleTable module=moduleTableRepo.getModule(orgModule.getModuleName(),orgModule.getOrganizationUUID());
 		if(module!=null) {
-			return "module already exists";
+			throw new ApiRequestException("module already exists");
 		}
-		moduleTableRepo.addModule(orgModule.getModuleName(),organization.getOrganization_UUID());
+		moduleTableRepo.addModule(orgModule.getModuleName(),orgModule.getOrganizationUUID());
 		return "Module Stored";
 	}
 	
+	
+	
 	@GetMapping(value="/getModules")
-	public Iterable<ModuleTable> getModule(@RequestParam String orgName){
-		Organization organization=organizationRepo.getOgranization(orgName);
-		Iterable<ModuleTable> modules=moduleTableRepo.getModules(organization.getOrganization_UUID());
+	public Iterable<ModuleTable> getModule(@RequestParam String orgUUID){
+		Iterable<ModuleTable> modules=moduleTableRepo.getModules(orgUUID);
 		return modules;
 	}
 	
